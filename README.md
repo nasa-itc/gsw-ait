@@ -43,3 +43,8 @@ The following are the default ports for communication with various endpoints and
 AIT does nor currently support some command data types (such as strings or bytearrays) and consequently some nos3 commands cannot be implemented yet using AIT.  At the time of writing, approx 95% of telemetry and command packets are implemented.
 
 Additionally, the API needs to be extended to provide full functionality.  Currently many endpoints are stubbed, faked or not implemented. Further work needs to be done on creating cookies and secure session.  Core realtime telemetry and commanding ARE implemented.
+
+# Credit
+We must credit all the contributors listed in this repository who enabled this work.
+In particular, Spinx Defense Inc. and @cjjacks who revitalized the AIT inclusion into NOS3.
+* https://github.com/sphinxdefense

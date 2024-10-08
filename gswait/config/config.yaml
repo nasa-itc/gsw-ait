@@ -1,14 +1,10 @@
 default:
-    database:
-        host: influxdb
-        port: 8086
-        un: root
-        pw: root
-
     extensions:
         ait.core.cmd.Cmd: gswait.cmd.NOS3Cmd
 
     command:
+        history:
+            filename: ../../cmdhist.pcap
         port: 3075
 
     logging:
@@ -21,17 +17,10 @@ default:
     tlmdict:
         filename:  tlm.yaml
 
-
     missions:
         - nos3:
             equipment: "ADCS IMU MAG NOVATEL_OEM615 ARDUCAM FSS STAR_TRACKER RADIO EPS TORQUER REACTION_WHEEL CFS CFDP CSS SYN SAMPLE"
             commands:
-              # DEBUG
-              - commandString: DEBUG
-                description: "Sends 'hello'"
-                commandId: 0x9999
-                mnemonicIds: []
-
               # ADCS
               - commandString: ADCS_NOOP_CC
                 description: This command sets the operational mode
@@ -1017,18 +1006,13 @@ default:
     server:
         plugins:
             - plugin:
-                name: ait.core.server.plugins.DataArchive
-                inputs:
-                    - telem_stream
-                datastore:
-                    ait.core.db.InfluxDBBackend
-
-            - plugin:
-                name: gswait.plugins.AITWebsocket
+                name: ait.gui.AITGUIPlugin
                 inputs:
                     - telem_stream
                 outputs:
                     - command_stream
+                html:
+                    directory: ../../gui
         inbound-streams:
             - stream:
                 name: telem_stream
@@ -1102,18 +1086,7 @@ default:
                         2200: "CFS_SCH_DIAGPACKET"
                         2199: "CFS_SCH_HKPACKET"
                         2218: "CFS_SC_HKTLM"
-
                       packet_secondary_header_length: 10
-            # - stream:
-            #     name: telem_stream
-            #     input:
-            #         - "UDP"
-            #         - "0.0.0.0"
-            #         - 5013
-            #     handlers:
-            #         - name: gswait.handlers.DebugHandler
-
-
         outbound-streams:
             - stream:
                 name: command_stream

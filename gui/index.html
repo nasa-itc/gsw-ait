@@ -1,0 +1,84 @@
+<!doctype html>
+<head>
+  <link rel="stylesheet" href="ait/gui/static/build/ait.bundle.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="ait/gui/static/build/ait.bundle.js"></script>
+  <style> tr:nth-child(even) {background-color: #f2f2f2;} </style>
+</head>
+
+<body>
+
+<!-- Status Bar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">AIT-NOS3</a><br>
+        </div>  <!-- /.navbar-header -->
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <p class="navbar-text">Telemetry Status:</p>
+            </li>
+            <li>
+                <p class="navbar-text ait-status-indicators">
+                    <ait-led on      = "ait:tlm:packet"
+                               off     = "ait:tlm:close"
+                               pending = "ait:tlm:open"
+                               error   = "ait:tlm:stale"
+                               default = "pending"></ait-led>
+                    cFS
+                </p>
+            </li>
+            <li>
+                <ait-clock class="navbar-text" doy="true"></ait-clock>
+            </li>
+        </ul>  <!-- /.navbar-right -->
+    </div>  <!-- /.container-fluid -->
+</div>  <!-- /.navbar -->
+
+<div class='site-container'>
+  <div class='telemcontainer'>
+    <ait-tabset class="nav-tabs">
+      <ait-tab title="CFS_CF_HKPACKET">
+        <table class="telem col1">
+            <tr><td>CMDCOUNTER:<td><ait-field packet="CFS_CF_HKPACKET" name="CMDCOUNTER"></ait-field></tr>
+            <tr><td>ERRCOUNTER:<td><ait-field packet="CFS_CF_HKPACKET" name="ERRCOUNTER"></ait-field></tr>
+        </table>
+      </ait-tab>
+    </ait-tabset>
+  </div>
+
+
+  <div class='ctrlcontainer'>
+    <ait-tabset class='nav-tabs'>
+      <ait-tab title='Commanding'>
+        <div class='cmd-tab-container'>
+          <div class="cmd-browser-container">
+            <ait-command-search>
+            </ait-command-search>
+          </div>
+          <div class="cmd-config-container">
+            <ait-command-configure>
+            </ait-command-configure>
+          </div>
+          <div class='cmd-search-container'>
+            <ait-command-input></ait-command-input>
+            <hr />
+          </div>
+        </div>
+      </ait-tab>
+      <ait-tab title='Command History'>
+        <div class="row">
+          <div class="col-lg-12">
+            <div style="height:200px;overflow:auto;">
+              <ait-command-history></ait-command-history>
+            </div>
+          </div>
+        </div>
+      </ait-tab>
+    </ait-tabset>
+  </div>
+</div>
+
+
+</body>
