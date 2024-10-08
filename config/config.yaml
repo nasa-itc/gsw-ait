@@ -1,9 +1,8 @@
 default:
-    extensions:
-        ait.core.cmd.Cmd: ait.cfs.cmd.cFSCmd
-
     command:
-        port: 1234
+        history:
+            filename: ../../cmdhist.pcap
+        port: 3075
 
     cmddict:
         filename:  cmd.yaml
@@ -12,16 +11,42 @@ default:
         filename:  tlm.yaml
 
     logging:
-        name:     ait
-        hostname: localhost
+        name: ait
+        hostname: yourCustomHostForLogging
 
-    gui:
-      html:
-        directory: ../gui
+    leapseconds:
+        filename: leapseconds.dat
 
-      port: 8080
+    phase: 'dev'
 
-      telemetry:
-        - stream:
-            port: 1235
-            type: ccsds
+    server:
+        plugins:
+            - plugin:
+                name: ait.gui.AITGUIPlugin
+                inputs:
+                    - log_stream
+                    - telem_stream
+                outputs:
+                    - command_stream
+                html:
+                    directory: ../gui
+
+        inbound-streams:
+            - stream:
+                name: log_stream
+                input:
+                    - 2514
+
+            - stream:
+                name: telem_stream
+                input:
+                    - 3076
+                handlers:
+                    - name: ait.core.server.handlers.PacketHandler
+                      packet: CFE_EVS_PACKET
+
+        outbound-streams:
+            - stream:
+                name: command_stream
+                output: 3075
+                command_subscriber: True
