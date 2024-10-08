@@ -1,0 +1,66 @@
+!Command
+name: CF_ENABLE_DIRECTORY_POLLING
+opcode: 0x71
+subsystem: Software
+desc: Command to Enable directory polling.
+arguments:
+  - !Fixed
+    name: CCSDS_STREAMID
+    desc: CCSDS Packet Identification
+    type: MSB_U16
+    value: 0x18B3
+    bytes: [0,1]
+  - !Fixed
+    name: CCSDS_SEQUENCE
+    desc: CCSDS Packet Sequence Control
+    type: MSB_U16
+    value: 0xc000
+    bytes: [2,3]
+  - !Fixed
+    name: CCSDS_LENGTH
+    desc: CCSDS Packet Data Length
+    type: MSB_U16
+    value: 5
+    bytes: [4,5]
+  - !Fixed
+    name: CCSDS_FC
+    desc: CCSDS Command Function Code
+    type: U8
+    value: 18
+    bytes: 6
+  - !Fixed
+    name: CCSDS_CHECKSUM
+    desc: CCSDS Command Checksum
+    type: U8
+    value: 0
+    bytes: 7
+  - !Argument
+    name:  CHAN
+    desc:  CFDP Chan 0 or 1. 0 to (CF_MAX_PLAYBACK_CHANNELS - 1).
+    units: none
+    type:  U8
+    bytes: 8
+    enum:
+      0: Chan 0
+      1: Chan 1
+  - !Argument
+    name:  DIRECTORY
+    desc:  0 to (CF_MAX_POLLING_DIRS_PER_CHAN - 1)
+    units: none
+    type:  U8
+    bytes: 9
+    range: [0,2]
+  - !Fixed
+    name:  SPARE1
+    desc:  Spare - Unused
+    units: none
+    type:  U8
+    bytes: 10
+    value: 0
+  - !Fixed
+    name:  SPARE2
+    desc:  Spare - Unused
+    units: none
+    type:  U8
+    bytes: 11
+    value: 0

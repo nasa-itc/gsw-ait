@@ -1,0 +1,48 @@
+!Command
+name: NOVATEL_OEM615_UNLOG_CC
+opcode: 0x48
+subsystem: Payload
+desc: Novatel_oem615 Unlog Command
+arguments:
+  - !Fixed
+    name: CCSDS_STREAMID
+    desc: CCSDS Packet Identification
+    type: MSB_U16
+    value: 0x1870
+    bytes: [0,1]
+  - !Fixed
+    name: CCSDS_SEQUENCE
+    desc: CCSDS Packet Sequence Control
+    type: MSB_U16
+    value: 0xc000
+    bytes: [2,3]
+  - !Fixed
+    name: CCSDS_LENGTH
+    desc: CCSDS Packet Data Length
+    type: MSB_U16
+    value: 2
+    bytes: [4,5]
+  - !Fixed
+    name: CCSDS_FC
+    desc: CCSDS Command Function Code
+    type: U8
+    value: 5
+    bytes: 6
+  - !Fixed
+    name: CCSDS_CHECKSUM
+    desc: CCSDS Command Checksum
+    type: U8
+    value: 0
+    bytes: 7
+  - !Argument
+    name:  LOG_TYPE
+    desc:  Log Type
+    units: none
+    type:  U8
+    bytes: 8
+    enum:
+      0: BESTXYZA
+      1: GPGGAA
+      2: RANGECMPA
+      3: BESTXYZB
+      4: RANGECMPB

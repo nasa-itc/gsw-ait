@@ -1,0 +1,69 @@
+!Command
+name: CF_RESET_COUNTERS
+opcode: 0x60
+subsystem: Software
+desc: This command resets the chosen CF Counters
+arguments:
+  - !Fixed
+    name: CCSDS_STREAMID
+    desc: CCSDS Packet Identification
+    type: MSB_U16
+    value: 0x18B3
+    bytes: [0,1]
+  - !Fixed
+    name: CCSDS_SEQUENCE
+    desc: CCSDS Packet Sequence Control
+    type: MSB_U16
+    value: 0xc000
+    bytes: [2,3]
+  - !Fixed
+    name: CCSDS_LENGTH
+    desc: CCSDS Packet Data Length
+    type: MSB_U16
+    value: 5
+    bytes: [4,5]
+  - !Fixed
+    name: CCSDS_FC
+    desc: CCSDS Command Function Code
+    type: U8
+    value: 1
+    bytes: 6
+  - !Fixed
+    name: CCSDS_CHECKSUM
+    desc: CCSDS Command Checksum
+    type: U8
+    value: 0
+    bytes: 7
+  - !Argument
+    name:  VALUE
+    desc:  Counters to reset
+    units: none
+    type:  U8
+    bytes: 8
+    enum:
+      0: ALL
+      1: CMD
+      2: FAULT
+      3: UP
+      4: DOWN
+  - !Fixed
+    name:  SPARE1
+    desc:  Spare - Unused
+    units: none
+    type:  U8
+    bytes: 9
+    value: 0
+  - !Fixed
+    name:  SPARE2
+    desc:  Spare - Unused
+    units: none
+    type:  U8
+    bytes: 10
+    value: 0
+  - !Fixed
+    name:  SPARE3
+    desc:  Spare - Unused
+    units: none
+    type:  U8
+    bytes: 11
+    value: 0

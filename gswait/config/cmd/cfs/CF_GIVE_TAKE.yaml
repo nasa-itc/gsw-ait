@@ -1,0 +1,51 @@
+!Command
+name: CF_GIVE_TAKE
+opcode: 0x78
+subsystem: Software
+desc: CF Give / Take Semaphore command.
+arguments:
+  - !Fixed
+    name: CCSDS_STREAMID
+    desc: CCSDS Packet Identification
+    type: MSB_U16
+    value: 0x18B3
+    bytes: [0,1]
+  - !Fixed
+    name: CCSDS_SEQUENCE
+    desc: CCSDS Packet Sequence Control
+    type: MSB_U16
+    value: 0xc000
+    bytes: [2,3]
+  - !Fixed
+    name: CCSDS_LENGTH
+    desc: CCSDS Packet Data Length
+    type: MSB_U16
+    value: 3
+    bytes: [4,5]
+  - !Fixed
+    name: CCSDS_FC
+    desc: CCSDS Command Function Code
+    type: U8
+    value: 25
+    bytes: 6
+  - !Fixed
+    name: CCSDS_CHECKSUM
+    desc: CCSDS Command Checksum
+    type: U8
+    value: 0
+    bytes: 7
+  - !Argument
+    name:  CHAN
+    desc:  CFDP Chan 0 or 1
+    units: none
+    type:  U8
+    bytes: 8
+    enum:
+      0: CHAN0
+      1: CHAN1
+  - !Argument
+    name:  GIVE_OR_TAKE
+    desc:  Give or take semaphore.
+    units: none
+    type:  U8
+    bytes: 9
